@@ -1,0 +1,21 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "TeleportGui"
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 150, 0, 50)
+button.Position = UDim2.new(0, 20, 0, 200)
+button.Text = "Teleport to Base"
+button.Parent = gui
+
+local basePart = workspace:WaitForChild("BaseTeleport")
+
+button.MouseButton1Click:Connect(function()
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:WaitForChild("HumanoidRootPart")
+
+    hrp.CFrame = basePart.CFrame + Vector3.new(0, 5, 0)
+end)
